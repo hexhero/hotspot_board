@@ -1,3 +1,10 @@
+#!/usr/bin/env python
+# -*- coding: utf-8 -*-
+
+'''
+数据来源：https://wallstreetcn.com/
+'''
+
 import requests
 
 def getAll():

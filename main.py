@@ -1,3 +1,11 @@
+# _*_ coding:utf-8 _*_
+'''
+作者：杨斌
+创建日期: 2023/9/21
+描述: 热点面板
+Python版本: 3.x
+'''
+
 from PyQt5.QtWidgets import QApplication, QWidget, QLabel, QMenu, QSystemTrayIcon,QAction
 from PyQt5 import QtCore
 from PyQt5.QtGui import QIcon
