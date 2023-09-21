@@ -35,15 +35,9 @@ class UI(QWidget):
         self.tray_icon.setContextMenu(self.tray_menu)
         # 连接信号槽
         self.show_action.triggered.connect(self.show)
-        self.quit_action.triggered.connect(self.close)
+        self.quit_action.triggered.connect(self.quit_application)
          # 显示托盘图标
         self.tray_icon.show()
-        
-        # 定时刷新
-        self.refresh()
-        self.timer = QtCore.QTimer()
-        self.timer.timeout.connect(self.refresh)
-        self.timer.start(1000 * 30)
         
         # 显示图片
         # self.imglabel = QLabel(self)
@@ -52,6 +46,12 @@ class UI(QWidget):
         # self.imglabel.setPixmap(icon)
         # self.imglabel.move(0, 0)
     
+        # 定时刷新
+        self.refresh()
+        self.timer = QtCore.QTimer()
+        self.timer.timeout.connect(self.refresh)
+        self.timer.start(1000 * 60)
+        
     # 关闭事件最小化到托盘
     def closeEvent(self, event):
         event.ignore()
@@ -62,6 +62,10 @@ class UI(QWidget):
             QSystemTrayIcon.Information,
             2000
         )
+    
+    def quit_application(self):
+        self.tray_icon.hide()
+        QApplication.quit()
     
     # 鼠标拖拽效果
     def mousePressEvent(self, event):
@@ -83,7 +87,13 @@ class UI(QWidget):
     def refresh(self):
         # usdcnh = data.getUSDCNH()
         ss, usdcnh = data.getAll()
-        self.label.setText(f'USDCNH: {usdcnh[2]}/{usdcnh[3]}\nSS: {ss[2]}/{round(ss[4], 2)}');
+        self.label.setText(f'USDCNH: {usdcnh[2]}/{usdcnh[3]}\nSS: {ss[2]}/{round(ss[4], 2)}')
+        # self.showMessage('热点面板', f'USDCNH: {usdcnh[2]}/{usdcnh[3]}\nSS: {ss[2]}/{round(ss[4], 2)}', QSystemTrayIcon.Information)
+        
+    # 显示系统消息
+    # def showMessage(self, title, message, icon):
+    #     if icon is None: icon = QSystemTrayIcon.Information
+    #     self.tray_icon.showMessage(title, message, icon, 2000)
         
     # 右键菜单
     def contextMenuEvent(self, event):
@@ -92,7 +102,7 @@ class UI(QWidget):
         action = cmenu.exec_(self.mapToGlobal(event.pos()))
         if action == exitAct:
             self.timer.stop()
-            self.close()
+            self.quit_application()
             
 if __name__ == '__main__':
     app = QApplication(sys.argv)
