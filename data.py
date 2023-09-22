@@ -40,6 +40,7 @@ def getData():
     data = data['data']['snapshot']
     print(data)
     rst = [
+        ['Hotspot DashBoard', 'Leo Yang'],
         [
             'USDCNH',
             str(data['USDCNH.OTC'][2]),

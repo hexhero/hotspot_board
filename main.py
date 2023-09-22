@@ -19,8 +19,11 @@ icon_path = filepath.resource_path("icon.png")
 class UI(QWidget):
     
     themes = {
+        'lichun': ['#fff799','#d5ebe1','#8b7042','#f3a694'],
         'spring': ['#ebeee8', '#d2af9d', '#ea5514', '#3271ae'],
-        'yushui': ['#f9d3e3', '#beb1aa', '#e5a84b', '#c0d695']
+        'yushui': ['#f9d3e3', '#beb1aa', '#e5a84b', '#c0d695'],
+        'jinzhe': ['#7c191e','#c35c5d','#c67915','#2c2f3b'],
+        'chunfen': ['#3271ae','#ebeee8','#d2af9d','#ea5514']
     }
     
     def __init__(self, theme='spring'):
@@ -149,6 +152,6 @@ class UI(QWidget):
 if __name__ == '__main__':
     print(__doc__)
     app = QApplication(sys.argv)
-    ui = UI(theme='yushui')
+    ui = UI(theme='chunfen')
     ui.show()
     sys.exit(app.exec_())
